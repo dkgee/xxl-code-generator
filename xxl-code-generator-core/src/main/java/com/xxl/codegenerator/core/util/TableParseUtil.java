@@ -61,12 +61,12 @@ public class TableParseUtil {
         List<FieldInfo> fieldList = new ArrayList<FieldInfo>();
 
         String fieldListTmp = tableSql.substring(tableSql.indexOf("(")+1, tableSql.lastIndexOf(")"));
-        String[] fieldLineList = fieldListTmp.split(",");
+        //此处要求必须SQL脚本按行分割
+        String[] fieldLineList = fieldListTmp.split("\n");
         if (fieldLineList.length > 0) {
             for (String columnLine :fieldLineList) {
                 columnLine = columnLine.trim();		                                        // `userid` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
                 if (columnLine.startsWith("`")){
-
                     // column Name
                     columnLine = columnLine.substring(1);			                        // userid` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
                     String columnName = columnLine.substring(0, columnLine.indexOf("`"));	// userid
@@ -99,9 +99,12 @@ public class TableParseUtil {
                     // field comment
                     String fieldComment = null;
                     if (columnLine.contains("COMMENT")) {
-                        String commentTmp = fieldComment = columnLine.substring(columnLine.indexOf("COMMENT")+7).trim();	// '用户ID',
+                        int indexCom = columnLine.indexOf("COMMENT") + 7;
+                        String commentTmp = fieldComment = columnLine.substring(indexCom).trim();	// '用户ID',
                         if (commentTmp.contains("'") || commentTmp.indexOf("'")!=commentTmp.lastIndexOf("'")) {
-                            commentTmp = commentTmp.substring(commentTmp.indexOf("'")+1, commentTmp.lastIndexOf("'"));
+                            int firstIndex = commentTmp.indexOf("'")+1;
+                            int lastIndex = commentTmp.lastIndexOf("'");
+                            commentTmp = commentTmp.substring(firstIndex , lastIndex );
                         }
                         fieldComment = commentTmp;
                     }
