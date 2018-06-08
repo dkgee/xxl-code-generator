@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* ${classInfo.classComment}
-*
-* Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
+* 描述：${classInfo.classComment}
+* 作者：JinHuaTao
+* 时间：'${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
 @Service
 public class ${classInfo.className}ServiceImpl implements ${classInfo.className}Service {
@@ -31,6 +31,17 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 		${classInfo.className?uncap_first}Dao.insert(${classInfo.className?uncap_first});
         return ReturnT.SUCCESS;
 	}
+
+    /**
+     * 批量新增
+     */
+     @Override
+     public void batchInsert(List<${classInfo.className}> list) {
+        if(list == null || list.isEmpty()){
+            return;
+        }
+	    ${classInfo.className?uncap_first}Dao.batchInsert(list);
+     }
 
 	/**
 	* 删除
@@ -68,7 +79,7 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 		int totalCount = ${classInfo.className?uncap_first}Dao.pageListCount(offset, pagesize);
 
 		// result
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> maps = new HashMap<String, Object>();
 		maps.put("pageList", pageList);
 		maps.put("totalCount", totalCount);
 

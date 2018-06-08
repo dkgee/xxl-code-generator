@@ -4,9 +4,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
-* ${classInfo.classComment}
-*
-* Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
+* 描述：${classInfo.classComment}
+* 作者：JinHuaTao
+* 时间：'${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
 @Component
 public interface ${classInfo.className}Dao {
@@ -15,6 +15,11 @@ public interface ${classInfo.className}Dao {
     * 新增
     */
     public int insert(@Param("${classInfo.className?uncap_first}") ${classInfo.className} ${classInfo.className?uncap_first});
+
+    /**
+    * 批量新增
+    */
+    public void batchInsert(@Param(List<${classInfo.className}> list);
 
     /**
     * 删除

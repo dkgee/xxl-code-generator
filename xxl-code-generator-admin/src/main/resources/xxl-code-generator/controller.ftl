@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* ${classInfo.classComment}
-*
-* Created by xuxueli on '${.now?string('yyyy-MM-dd HH:mm:ss')}'.
+* 描述：${classInfo.classComment}
+* 作者：JinHuaTao
+* 时间：'${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
 @Controller
 public class ConfController {

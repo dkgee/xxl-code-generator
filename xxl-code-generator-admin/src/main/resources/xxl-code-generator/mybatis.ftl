@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Dao路径.${classInfo.className}Dao">
 
     <resultMap id="${classInfo.className}" type="Model路径.${classInfo.className}" >
@@ -44,6 +43,35 @@
         )
     </insert>
 
+    <insert id="batchInsert" parameterType="java.util.List" >
+        INSERT INTO ${classInfo.tableName} (
+        <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+            <#list classInfo.fieldList as fieldItem >
+                <#if fieldItem.columnName != "Id" >
+                    `${fieldItem.columnName}`<#if fieldItem_has_next>,</#if>
+                </#if>
+            </#list>
+        </#if>
+        )VALUES
+        <foreach collection="list" item="item" index="0" separator=",">
+        (
+        <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+            <#list classInfo.fieldList as fieldItem >
+                <#if fieldItem.columnName != "Id" >
+                    <#if fieldItem.columnName="AddTime" || fieldItem.columnName="UpdateTime" >
+                        NOW()<#if fieldItem_has_next>,</#if>
+                    <#else>
+                    ${r"#{"}${classInfo.className?uncap_first}.${fieldItem.fieldName}${r"}"}<#if fieldItem_has_next>,</#if>
+                    </#if>
+                </#if>
+            </#list>
+        </#if>
+        )
+        </foreach>
+    </insert>
+
+
+
     <delete id="delete" parameterType="java.util.Map" >
         DELETE FROM ${classInfo.tableName}
         WHERE `id` = ${r"#{id}"}
@@ -77,6 +105,7 @@
     <select id="pageListCount" parameterType="java.util.Map" resultType="int">
         SELECT count(1)
         FROM ${classInfo.tableName}
+        LIMIT ${r"#{offset}"}, ${r"#{pagesize}"}
     </select>
 
 </mapper>
