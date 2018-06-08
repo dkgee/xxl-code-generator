@@ -8,7 +8,7 @@ import java.util.List;
 * 作者：JinHuaTao
 * 时间：'${.now?string('yyyy-MM-dd HH:mm:ss')}'.
 */
-@Component
+@Repository
 public interface ${classInfo.className}Dao {
 
     /**
@@ -19,7 +19,7 @@ public interface ${classInfo.className}Dao {
     /**
     * 批量新增
     */
-    public void batchInsert(@Param(List<${classInfo.className}> list);
+    public void batchInsert(List<${classInfo.className}> list);
 
     /**
     * 删除
