@@ -1,12 +1,12 @@
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
 * 描述：${classInfo.classComment}
 * 作者：JinHuaTao
-* 时间：'${.now?string('yyyy-MM-dd HH:mm:ss')}'.
+* 时间：${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 @Repository
 public interface ${classInfo.className}Dao {

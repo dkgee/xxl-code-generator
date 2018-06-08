@@ -13,7 +13,7 @@ import java.util.Date;
 /**
 * 描述：${classInfo.classComment}
 * 作者：JinHuaTao
-* 时间：'${.now?string('yyyy-MM-dd HH:mm:ss')}'.
+* 时间：${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 public class ${classInfo.className} implements Serializable {
     private static final long serialVersionUID = 42L;

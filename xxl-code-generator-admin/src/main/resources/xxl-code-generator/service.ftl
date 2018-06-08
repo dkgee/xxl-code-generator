@@ -3,7 +3,7 @@ import java.util.Map;
 /**
 * 描述：${classInfo.classComment}
 * 作者：JinHuaTao
-* 时间：'${.now?string('yyyy-MM-dd HH:mm:ss')}'.
+* 时间：${.now?string('yyyy-MM-dd HH:mm:ss')}
 */
 public interface ${classInfo.className}Service {
 
