@@ -52,17 +52,13 @@
                 </#if>
             </#list>
         </#if>
-        )VALUES
+        ) VALUES
         <foreach collection="list" item="item" index="0" separator=",">
         (
         <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
             <#list classInfo.fieldList as fieldItem >
                 <#if fieldItem.columnName != "Id" >
-                    <#if fieldItem.columnName="AddTime" || fieldItem.columnName="UpdateTime" >
-                        NOW()<#if fieldItem_has_next>,</#if>
-                    <#else>
-                    ${r"#{"}${classInfo.className?uncap_first}.${fieldItem.fieldName}${r"}"}<#if fieldItem_has_next>,</#if>
-                    </#if>
+                    ${r"#{"}item.${fieldItem.fieldName}${r"}"}<#if fieldItem_has_next>,</#if>
                 </#if>
             </#list>
         </#if>
@@ -82,10 +78,9 @@
         SET
         <#list classInfo.fieldList as fieldItem >
         <#if fieldItem.columnName != "Id" && fieldItem.columnName != "AddTime" && fieldItem.columnName != "UpdateTime" >
-            ${fieldItem.columnName} = ${r"#{"}${classInfo.className?uncap_first}.${fieldItem.fieldName}${r"}"},
+            ${fieldItem.columnName} = ${r"#{"}${classInfo.className?uncap_first}.${fieldItem.fieldName}${r"}"}<#if fieldItem_has_next>,</#if>
         </#if>
         </#list>
-            UpdateTime = NOW()
         WHERE `id` = ${r"#{"}${classInfo.className?uncap_first}.id${r"}"}
     </update>
 
